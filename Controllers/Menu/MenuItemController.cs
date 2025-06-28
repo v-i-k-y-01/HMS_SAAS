@@ -27,7 +27,7 @@ public class MenuItemController(IMenuItemsService menuItemsService, ILogger<Menu
         }
     }
 
-    [HttpPost("CreateNewItem")]
+    [HttpPost("CreateNewItem")]  //vinush
     public async Task<IActionResult> CreateNewItem ([FromBody]MenuItems Menu)
     {
         try
