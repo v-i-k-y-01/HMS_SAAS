@@ -7,7 +7,7 @@ namespace HMS_SAAS.Controllers.Menu;
 [Route("api/[controller]")]
 public class MenuItemController(IMenuItemsService menuItemsService, ILogger<MenuItemController> logger) : ControllerBase
 {
-    [HttpGet("GetMenuItems")]
+    [HttpGet("GetMenuItems")] //vignesh
     public async Task<IActionResult> GetMenuItems()
     {
         try
@@ -46,4 +46,20 @@ public class MenuItemController(IMenuItemsService menuItemsService, ILogger<Menu
             return StatusCode(500, "Internal server error: " + ex.Message);
         }
     }
+    [HttpGet("GetMenuItemById/{itemId}")]  //vignesh
+    public async Task<IActionResult> GetMenuItemById(string itemId)
+    {
+        try
+        {
+            var item = await menuItemsService.GetMenuItemByIdAsync(itemId);
+            return Ok(item);
+        }
+        catch(Exception ex)
+        {
+            // Log the exception (optional)
+            return StatusCode(500, "Internal server error: " + ex.Message);
+        }
+
+    }
+}
 }
