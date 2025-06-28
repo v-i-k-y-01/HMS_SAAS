@@ -1,0 +1,6 @@
+@HMS_SAAS_HostAddress = http://localhost:5048
+
+GET {{HMS_SAAS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
