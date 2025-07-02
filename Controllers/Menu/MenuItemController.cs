@@ -62,4 +62,3 @@ public class MenuItemController(IMenuItemsService menuItemsService, ILogger<Menu
 
     }
 }
-}
