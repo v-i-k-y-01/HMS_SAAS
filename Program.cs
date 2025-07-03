@@ -1,5 +1,6 @@
 using HMS_SAAS.DataLayer;
 using HMS_SAAS.ServiceLayer.Menu;
+using HMS_SAAS.ServiceLayer.OrderList;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 
@@ -7,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IMenuItemsService, MenuItemService>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+//builder.Services.AddControllers().AddJsonOptions(x =>
+//{
+//    x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+//});
+
 // Register DbContext with SQL Server
 builder.Services.AddDbContext<HMSDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
