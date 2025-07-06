@@ -61,4 +61,22 @@ public class MenuItemController(IMenuItemsService menuItemsService, ILogger<Menu
         }
 
     }
+    [HttpPost("UpdateMenuItem")] //vignesh
+    public async Task<IActionResult> UpdateMenuItem([FromBody] DataLayer.Models.MenuItems menuItems)
+    {
+        try
+        {
+            if (menuItems == null)
+            {
+                return BadRequest("Menu item cannot be null.");
+            }
+            var updatedItem = await menuItemsService.UpdateMenuItemsAsync(menuItems);
+            return Ok(updatedItem);
+        }
+        catch (Exception ex)
+        {
+            // Log the exception (optional)
+            return StatusCode(500, "Internal server error: " + ex.Message);
+        }
+    }
 }
