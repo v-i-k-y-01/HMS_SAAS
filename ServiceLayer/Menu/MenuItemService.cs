@@ -1,5 +1,6 @@
 ﻿using HMS_SAAS.DataLayer;
 using HMS_SAAS.DataLayer.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace HMS_SAAS.ServiceLayer.Menu;
@@ -40,6 +41,21 @@ public class MenuItemService(HMSDbContext context , ILogger<MenuItemService> log
             logger.LogError(ex, "Error fetching menu item by ID");
             throw;
         }  
+    }
+    public async Task<MenuItems>UpdateMenuItemsAsync (MenuItems menuItems)
+    {
+        var existingItem = await context.MenuItems.FirstOrDefaultAsync(x => x.ItemId == menuItems.ItemId);
+        if (existingItem == null)
+        {
+            throw new KeyNotFoundException($"Menu item with ID {menuItems.ItemId} not found.");
+        }
+        existingItem.ItemName = menuItems.ItemName;
+        existingItem.Category = menuItems.Category;
+        existingItem.PricePerUnit = menuItems.PricePerUnit;
+        existingItem.IsAvailable = menuItems.IsAvailable;
+        existingItem.UpdatedAt = DateTime.Now;
+        context.SaveChangesAsync();
+        return existingItem;
     }
 }
 

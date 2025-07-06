@@ -6,4 +6,5 @@ public interface IMenuItemsService
 {
     Task<List<MenuItems>> GetMenuItemsAsync();
     Task<MenuItems> GetMenuItemByIdAsync(string itemId);
+    Task<MenuItems> UpdateMenuItemsAsync(MenuItems menuItems);
 }
