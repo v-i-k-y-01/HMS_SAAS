@@ -6,7 +6,7 @@ public class MenuItems
 {
     [Key]
     public string ItemId { get; set; } // m, s, b
-    public string ItemName { get; set; }
+    public string ItemName { get; set; } 
     public string Category { get; set; }
     public decimal PricePerUnit { get; set; }
     public bool IsAvailable { get; set; } = true;

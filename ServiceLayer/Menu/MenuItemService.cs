@@ -57,5 +57,16 @@ public class MenuItemService(HMSDbContext context , ILogger<MenuItemService> log
         context.SaveChangesAsync();
         return existingItem;
     }
+
+    public async Task<MenuItems> CreateNewItem(MenuItems menu)
+    {
+        if (string.IsNullOrWhiteSpace(menu.ItemId))
+            menu.ItemId = Guid.NewGuid().ToString();
+        menu.CreatedAt = DateTime.Now;
+        menu.UpdatedAt = DateTime.Now;
+        context.MenuItems.Add(menu);
+        await context.SaveChangesAsync();
+        return menu;
+    }
 }
 
